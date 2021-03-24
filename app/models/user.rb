@@ -16,5 +16,5 @@ class User < ApplicationRecord
   validates_format_of :first_name, :last_name, with: NAME_REGEX
 
   NAME_KANA_REGEX = /\A[ァ-ヶー－]+\z/.freeze
-  validates_format_of :first_name_kana, :last_name_kana, with: NAME_KANA_REGEX
+  validates_format_of :first_name_kana, :last_name_kana, with: NAME_KANA_REGEX 
 end
