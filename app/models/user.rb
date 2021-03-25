@@ -14,7 +14,7 @@ class User < ApplicationRecord
 
   validates :encrypted_password, :password, :password_confirmation, format: { with: /(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{6,}/ } # 半角英数字混合での入力ようのバリデーション
 
-  NAME_REGEX = /\A[ぁ-んァ-ン一-龥]/.freeze
+  NAME_REGEX = /\A[ぁ-んァ-ヶ一-龥々ー]+\z/.freeze
   validates_format_of :first_name, :last_name, with: NAME_REGEX
 
   NAME_KANA_REGEX = /\A[ァ-ヶー－]+\z/.freeze
