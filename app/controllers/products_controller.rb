@@ -3,6 +3,15 @@ class ProductsController < ApplicationController
     # @product = Product.all
   end
 
-  def create
+  def new
   end
+
+  private
+
+  def message_params
+    params.require(:product).permit(:content, :image).merge(user_id: current_user.id)
+  end
+
+
+
 end
