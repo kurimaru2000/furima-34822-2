@@ -89,3 +89,4 @@
 - belongs_to :product
 - has_one    :buyer
 
+## テーブル設計
