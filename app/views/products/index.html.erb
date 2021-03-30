@@ -129,10 +129,8 @@
     
           <% @products.each do |product| %>
       <li class='list'>
-        <%= link_to "#" do %>
-        <%# このリンクはそれぞれのshowに飛ばすためのもの %>
         <div class='item-img-content'>
-          <%= image_tag(product.image, class: "item-img") %>
+          <%= link_to image_tag(product.image, class: "item-img"), product_path(product.id), method: :get %>
 
           <%# 商品が売れていればsold outを表示しましょう %>
           <div class='sold-out'>
@@ -146,14 +144,14 @@
             <%= product.name %>
           </h3>
           <div class='item-price'>
-            <span><%= product.price %>円<br><%= Deliveryfee.find(product.delivery_fee_id).name %></span>
+            <span><%= product.price %>円<br><%= product.delivery_fee.name %></span>
             <div class='star-btn'>
               <%= image_tag "star.png", class:"star-icon" %>
               <span class='star-count'>0</span>
             </div>
           </div>
         </div>
-        <% end %>
+     
       </li>
     
   <% end %>
@@ -181,7 +179,7 @@
 
     </ul>
   </div>
- 
+  
 </div>
 <%= link_to(new_product_path, class: 'purchase-btn') do %>
   <span class='purchase-btn-text'>出品する</span>

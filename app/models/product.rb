@@ -3,8 +3,8 @@ class Product < ApplicationRecord
   belongs_to :category
   belongs_to :status
   belongs_to :perfecture
-  belongs_to :deliveryday
-  belongs_to :deliveryfee
+  belongs_to :delivery_days
+  belongs_to :delivery_fee
   belongs_to :user
   has_one_attached :image
 
