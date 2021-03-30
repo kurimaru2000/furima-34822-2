@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :edit]
+  before_action :authenticate_user!, only: [:new, :edit, :destroy]
   def index
     @products = Product.includes(:user).order('created_at DESC')
   end
@@ -37,6 +37,16 @@ class ProductsController < ApplicationController
       render :edit
     end
   end
+
+  # def destroy
+    # product = Product.find(params[:id])
+    # unless product.user_id == current_user.id
+        # redirect_to action: :index
+    # else
+        # product.destroy
+        # redirect_to action: :index
+    # end
+  # end
 
   private
 
