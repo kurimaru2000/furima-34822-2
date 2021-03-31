@@ -1,6 +1,7 @@
 class ProductsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :destroy, :update]
-  before_action :product_find, only:[:show, :edit, :update]
+  before_action :product_find, only:[:show, :edit, :update, :destroy]
+  before_action :move_to_index, only:[:edit, :update, :destroy]
   def index
     @products = Product.includes(:user).order('created_at DESC')
   end
@@ -22,28 +23,19 @@ class ProductsController < ApplicationController
   end
 
   def edit
-    unless @product.user_id == current_user.id
-      redirect_index
-    end
   end
 
   def update
-    redirect_to action: :indec unless @product.user_id == current_user.id
       if @product.update(product_params)
-        redirect_index
+         redirect_to root_path
       else
         render :edit
       end 
   end
 
   def destroy
-    product = Product.find(params[:id])
-    unless product.user_id == current_user.id
-        redirect_index
-    else
-        product.destroy
-        redirect_index
-    end
+      @product.destroy
+      redirect_to root_path
   end
 
   private
@@ -55,10 +47,10 @@ class ProductsController < ApplicationController
   def product_find
     @product = Product.find(params[:id])
   end
-  
-  def redirect_index
-    redirect_to action: :index
+
+  def move_to_index
+    unless @product.user_id == current_user.id
+      redirect_to root_path
+    end
   end
-
-
 end
