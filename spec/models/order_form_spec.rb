@@ -13,6 +13,14 @@ RSpec.describe OrderForm, type: :model do
       it '郵便番号、都道府県、市区町村、番地、電話番号を入力したら購入できる' do
         expect(@order_form).to be_valid
       end
+      it '建物名は空でも購入できる' do
+        @order_form.building_name = ''
+        expect(@order_form).to be_valid
+      
+      end
+      
+
+
     end
     context '商品購入がうまくいかないとき' do
       it '郵便番号が空だと購入できない' do
@@ -59,6 +67,16 @@ RSpec.describe OrderForm, type: :model do
         @order_form.telephone_number = 'abcdefghjkl'
         @order_form.valid?
         expect(@order_form.errors.full_messages).to include("Telephone number is invalid")
+      end
+      it 'user_idが空では購入できない' do
+        @order_form.user_id = ''
+        @order_form.valid?
+        expect(@order_form.errors.full_messages).to include("User can't be blank")
+      end
+      it 'product_idが空では購入できない' do
+        @order_form.product_id = ''
+        @order_form.valid?
+        expect(@order_form.errors.full_messages).to include("Product can't be blank")
       end
     end
   end
