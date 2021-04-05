@@ -5,11 +5,8 @@ class OrdersController < ApplicationController
 
   def index
     @order_form = OrderForm.new
-    @product = Product.find(params[:product_id])
+    
 
-  end
-
-  def new
   end
 
   def create

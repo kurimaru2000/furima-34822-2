@@ -50,11 +50,15 @@ RSpec.describe OrderForm, type: :model do
         @order_form.valid?
         expect(@order_form.errors.full_messages).to include('Postal code is invalid')
       end
-
       it 'クレジットカード情報が体と購入できない' do
         @order_form.token = ''
         @order_form.valid?
         expect(@order_form.errors.full_messages).to include("Token can't be blank")
+      end
+      it '電話番号は数字でないと購入できない' do
+        @order_form.telephone_number = 'abcdefghjkl'
+        @order_form.valid?
+        expect(@order_form.errors.full_messages).to include("Telephone number is invalid")
       end
     end
   end
