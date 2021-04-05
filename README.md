@@ -19,7 +19,7 @@
 
 - has_many :products
 - has_many :comments
-- has_many :product_users
+- has_many :orders
 
 
 ## products テーブル
@@ -39,7 +39,7 @@
 ### Association
 
 - has_many   :comments
-- has_one  :product_user
+- has_one  :order
 - belongs_to :user
 
 
@@ -68,14 +68,14 @@
 | numbering        | string     | null: false                     |
 | building_name    | string     |                                 | 
 | telephone_number | string     | null: false                     |
-| product_user     | references | null: false, foreign_key: true  |
+| order            | references | null: false, foreign_key: true  |
 
 ### Association
 
-- belongs_to :product_user
+- belongs_to :order
 
 
-## product_users テーブル
+## orders テーブル
 
 | Column  | Type        | Options                        |
 | ------- | ----------- | ------------------------------ |
