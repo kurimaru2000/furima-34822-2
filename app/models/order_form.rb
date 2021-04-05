@@ -1,8 +1,7 @@
 class OrderForm
   # 配送先と購入履歴の情報を同時に保存するファイル
   include ActiveModel::Model
-  attr_accessor :postal_code, :perfecture_id, :city, :numbering, :building_name, :telephone_number, :product_id, :user_id,
-                :order_id, :token
+  attr_accessor :postal_code, :perfecture_id, :city, :numbering, :building_name, :telephone_number, :product_id, :user_id, :token
 
   # ここにバリデーションの処理を書く
   with_options presence: true do

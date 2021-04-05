@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
-  before_action :authenticate_user!, only: [:index]
+  before_action :authenticate_user!, only: [:index, :create]
+  before_action :product_find, only: [:index, :create]
   before_action :product_sold_out, only: [:index, :create]
   before_action :product_buying_myself, only: [:index, :create]
 
@@ -36,13 +37,15 @@ class OrdersController < ApplicationController
     )
   end
 
-  def product_sold_out
+  def product_find
     @product = Product.find(params[:product_id])
-    redirect_to root_path if @product.orders.present?
+  end
+
+  def product_sold_out
+    redirect_to root_path if @product.order.present?
   end
 
   def product_buying_myself
-    @product = Product.find(params[:product_id])
     redirect_to root_path if @product.user_id == current_user.id
   end
 end

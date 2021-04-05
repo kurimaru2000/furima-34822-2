@@ -16,23 +16,26 @@ RSpec.describe OrderForm, type: :model do
       it '建物名は空でも購入できる' do
         @order_form.building_name = ''
         expect(@order_form).to be_valid
-      
       end
-      
-
-
     end
+
     context '商品購入がうまくいかないとき' do
       it '郵便番号が空だと購入できない' do
         @order_form.postal_code = ''
         @order_form.valid?
         expect(@order_form.errors.full_messages).to include("Postal code can't be blank")
       end
+      it '都道府県IDが１だと購入できない' do
+        @order_form.perfecture_id = 1
+        @order_form.valid?
+        expect(@order_form.errors.full_messages).to include("Perfecture must be other than 1")
+      end
       it '都道府県が空だと購入できない' do
         @order_form.perfecture_id = ''
         @order_form.valid?
         expect(@order_form.errors.full_messages).to include('Perfecture is not a number')
       end
+      
       it '市区町村が空だと購入できない' do
         @order_form.city = ''
         @order_form.valid?
