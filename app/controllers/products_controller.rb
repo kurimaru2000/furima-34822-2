@@ -21,7 +21,6 @@ class ProductsController < ApplicationController
   end
 
   def show
-    @order = Product.find(params[:id])
   end
 
   def edit
